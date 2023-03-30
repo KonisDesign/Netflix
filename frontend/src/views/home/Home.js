@@ -1,7 +1,8 @@
 import React from 'react'
-import Card from '../../components/home/Card';
-import Faq from '../../components/home/Faq';
-import Hero from '../../components/home/Hero';
+import Card from '../../components/card/Card';
+import Faq from '../../components/faq/Faq';
+import Footer from '../../components/footer-home/Footer';
+import Hero from '../../components/hero/Hero';
 import './Home.scss'
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
       <Card Style={3} />
       <Card Style={4} />
       <Faq />
+      <Footer />
     </div>
   )
 }

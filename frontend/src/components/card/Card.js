@@ -1,4 +1,5 @@
 import React from 'react'
+import './Card.scss'
 
 export default function Card(props) {
 
@@ -9,7 +10,7 @@ export default function Card(props) {
             <h2>Regardez Netflix sur votre Smart TV, PlayStation, Xbox, Chromecast, Apple TV, lecteur Blu-ray et bien plus.</h2>
         </div>
         <div className='media'>
-            <video width="75%" autoPlay={true} muted loop playsInline>
+            <video className='tv' width="75%" autoPlay={true} muted loop playsInline>
                 <source src={process.env.PUBLIC_URL + "/assets/home-video-1.m4v"} type="video/mp4"/>
             </video>
             <img src={process.env.PUBLIC_URL + "/assets/tv.png"} alt='tv.png'/>
@@ -20,7 +21,7 @@ export default function Card(props) {
   (
     <div className='card'>
         <div className='media'>
-            <video width="60%" autoPlay={true} muted loop playsInline>
+            <video className='devices' width="60%" autoPlay={true} muted loop playsInline>
                 <source src={process.env.PUBLIC_URL + "/assets/home-video-2.m4v"} type="video/mp4"/>
             </video>
             <img src={process.env.PUBLIC_URL + "/assets/device-pile.png"} alt='device.png'/>

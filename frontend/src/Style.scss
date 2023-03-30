@@ -36,12 +36,16 @@ h4 {
     font-weight: 400;
 }
 
+h5 {
+    font-size: 13px;
+}
+
 button {
     cursor: pointer;
 }
 
 b {
-    font-weight: 500;
+    font-weight: 600;
     font-size: 1.25rem;
 }
 
@@ -77,3 +81,99 @@ b {
     width: 200px;
     height: auto;
 }
+
+.subscribe-actions {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+
+    .primary-button {
+        width: 200px;
+        height: 58px;
+        font-size: 24px;
+    }
+
+    .get-start-input {
+        width: 350px;
+        height: 48px;
+        padding: 10px 10px 0px;
+        border: 1px solid rgb(133, 133, 133);
+        border-radius: 5px;
+        background-color: #1C2432;
+        outline-color: #fff;
+        color: #fff;
+        z-index: 99;
+
+        &::placeholder {
+            color: transparent;
+        }
+
+        &:placeholder-shown~label {
+            font-size: 18px;
+            cursor: text;
+            top: 20px;
+        }
+
+        &:focus {
+            ~label {
+                top: 8px;
+                font-size: 14px;
+                color: rgb(133, 133, 133);
+                font-weight: 400;
+            }
+        }
+    }
+
+    label {
+        position: absolute;
+        top: 8px;
+        left: 10px;
+        color: rgb(133, 133, 133);
+        display: block;
+        transition: 0.2s;
+        z-index: 99;
+    }
+}
+
+.scale-in-ver-top {
+	-webkit-animation: scale-in-ver-top 0.1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: scale-in-ver-top 0.1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes scale-in-ver-top {
+    0% {
+      -webkit-transform: scaleY(0);
+              transform: scaleY(0);
+      -webkit-transform-origin: 100% 0%;
+              transform-origin: 100% 0%;
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: scaleY(1);
+              transform: scaleY(1);
+      -webkit-transform-origin: 100% 0%;
+              transform-origin: 100% 0%;
+      opacity: 1;
+    }
+  }
+  @keyframes scale-in-ver-top {
+    0% {
+      -webkit-transform: scaleY(0);
+              transform: scaleY(0);
+      -webkit-transform-origin: 100% 0%;
+              transform-origin: 100% 0%;
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: scaleY(1);
+              transform: scaleY(1);
+      -webkit-transform-origin: 100% 0%;
+              transform-origin: 100% 0%;
+      opacity: 1;
+    }
+  }
+  
