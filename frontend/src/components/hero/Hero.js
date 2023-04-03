@@ -13,7 +13,7 @@ export default function Hero() {
     const response = await axios.get("http://localhost:8888/signup");
     const userExist = response.data.find((post) => post.Email === newEmail);
     if (userExist) {
-      navigate("/login");
+      navigate("/login", { state: { User: newEmail } });
       return;
     } else {
       navigate("/signup", { state: { User: newEmail } });

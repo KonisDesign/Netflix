@@ -1,4 +1,3 @@
-const { hashPassword, checkPassword } = require('../utils/password.utils');
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({

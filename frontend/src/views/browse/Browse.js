@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Header from '../../components/header-browse/HeaderBrowse';
+import './Browse.scss'
+import HeroBrowse from '../../components/hero-browse/HeroBrowse';
 
 const Browse = ({ onLogout }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.clear();
-      navigate('/login');
+    navigate('/login');
   };
 
   useEffect(() => {
@@ -19,8 +22,9 @@ const Browse = ({ onLogout }) => {
   }, [navigate]);
 
   return (
-    <div>
-      <h1>Browse</h1>
+    <div className='browse-container'>
+      <Header />
+      <HeroBrowse />
       <button onClick={() => handleLogout()}>Logout</button>
     </div>
   );

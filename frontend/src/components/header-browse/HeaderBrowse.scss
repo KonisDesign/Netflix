@@ -1,0 +1,28 @@
+.header-browse {
+    width: 96%;
+    height: auto;
+    padding: 0px 2%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 212, 255, 0) 100%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+
+    .main {
+        width: auto;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+
+        button img {
+            width: 40px;
+            height: 40px;
+        }
+    }
+}

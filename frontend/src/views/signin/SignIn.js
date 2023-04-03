@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from "axios";
 import './SignIn.scss';
 
 export default function SignIn() {
-  const [email, setEmail] = useState("");
+
+  const { state } = useLocation();
+
+  const [email, setEmail] = useState(state?.User ?? '');
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const token = localStorage.getItem('token');

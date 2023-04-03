@@ -1,0 +1,96 @@
+$red : rgb(229, 9, 20);
+
+.hero-browse {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    .hero-movie {
+        width: 100%;
+        height: 100vh;
+        object-fit: cover;
+    }
+
+    .hero-image {
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+        object-fit: cover;
+    }
+
+    .media-infos {
+        width: 40%;
+        height: auto;
+        padding: 0px 40px;
+        color: #fff;
+        position: absolute;
+
+        img {
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            max-height: 180px;
+        }
+
+        .top-media {
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 20px;
+
+            h4 {
+                width: 50px;
+                height: 60px;
+                margin: 0;
+                border-radius: 8px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                background-color: $red;
+                font-weight: 600;
+            }
+        }
+
+        h4 {
+            margin: 0;
+        }
+
+        .actions {
+            width: auto;
+            height: auto;
+            margin-top: 30px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 10px;
+        }
+    }
+
+    .video-actions {
+        width: auto;
+        height: auto;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 15px;
+        color: #fff;
+        position: absolute;
+        right: 0;
+        top: 70vh;
+
+        h4 {
+            width: auto;
+            height: auto;
+            padding: 14px 60px 14px 30px;
+            border-left: 3px solid #fff;
+            background-color: rgba($color: #000000, $alpha: .3);
+        }
+    }
+
+}
