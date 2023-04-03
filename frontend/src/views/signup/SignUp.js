@@ -12,7 +12,7 @@ export default function SignUp() {
   const { state } = useLocation();
 
   const [formData, setFormData] = useState({
-    Email: state.User,
+    Email: state?.User?? '',
     Password: ''
   });
 

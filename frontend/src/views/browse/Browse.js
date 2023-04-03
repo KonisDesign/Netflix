@@ -13,10 +13,8 @@ const Browse = ({ onLogout }) => {
   };
 
   useEffect(() => {
-    // Check if the user is logged in before allowing access to the page
     const isLoggedIn = !!localStorage.getItem('token');
     if (!isLoggedIn) {
-      // Redirect the user to the login page if not logged in
       navigate('/login');
     }
   }, [navigate]);

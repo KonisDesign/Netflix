@@ -24,7 +24,7 @@ export default function SignIn() {
       localStorage.setItem('token', response.data.token);
       navigate('/browse')
     } catch (error) {
-      setErrorMessage(error);
+      setErrorMessage(error.response.data.error);
     }
   };
 

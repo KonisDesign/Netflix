@@ -4,6 +4,7 @@ import Home from './views/home/Home';
 import SignIn from './views/signin/SignIn';
 import SignUp from './views/signup/SignUp';
 import Browse from './views/browse/Browse';
+import Play from './views/play/Play';
 
 const App = () => {
 
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/login" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/browse" element={<Browse />} />
+        <Route path="/play/:id" element={<Play />} />
       </Routes>
     </Router>
   );

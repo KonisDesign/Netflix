@@ -67,19 +67,19 @@ b {
 .browse-button {
     width: auto;
     height: auto;
-    padding: 15px 27px;
+    padding: 12px 27px;
     border: none;
     border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
     cursor: pointer;
 
     i {
-        font-size: 26px;
+        font-size: 24px;
     }
 }
 
@@ -116,6 +116,10 @@ b {
         color: #f3f3f3;
     }
 
+    &:focus {
+        font-weight: 600;
+    }
+
     i {
         font-size: 18px;
     }
@@ -129,6 +133,38 @@ b {
     background-color: transparent;
     color: #fff;
     font-size: 20px;
+}
+
+.play-button {
+    width: auto;
+    height: auto;
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    font-size: 42px;
+}
+
+.play-button {
+    width: auto;
+    height: auto;
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    font-size: 42px;
+}
+
+.play-control-button {
+    width: 60px;
+    height: auto;
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    font-size: 46px;
+    line-height: 60px;
+
+    &:hover {
+        font-size: 56px;
+    }
 }
 
 .internal-link {

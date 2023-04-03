@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Card from '../../components/card/Card';
 import Faq from '../../components/faq/Faq';
 import Footer from '../../components/footer-home/Footer';
 import Hero from '../../components/hero/Hero';
 import './Home.scss'
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
+
+  const token = localStorage.getItem('token');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token) {
+      navigate('/browse');
+    }
+  });
 
   return (
     <div className='home-container'>

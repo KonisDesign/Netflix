@@ -44,18 +44,18 @@ module.exports.loginUser = async (req, res) => {
 
     if (!user) {
       // Unauthorized
-      return res.status(401).json({ error: 'Invalid email or password' });
+      return res.status(401).json({ error: 'Email ou mot de passe invalide' });
     }
 
     // Check if the password is correct
     const isMatch = await bcrypt.compare(Password, user.Password);
     if (!isMatch) {
       // Unauthorized
-      return res.status(401).json({ error: 'Invalid email or password' });
+      return res.status(401).json({ error: 'Email ou mot de passe invalide' });
     }
 
     // Create a JWT token with the user id as payload
-    const token = jwt.sign({ id: user._id }, secretKey, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user._id }, secretKey, { expiresIn: '24h' });
     
     res.json({ token });
   } catch (error) {
