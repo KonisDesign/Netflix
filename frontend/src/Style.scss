@@ -103,10 +103,60 @@ b {
         padding: 10px 10px 0px;
         border: 1px solid rgb(133, 133, 133);
         border-radius: 5px;
-        background-color: #1C2432;
+        background-color: rgba($color: #1C2432, $alpha: .2);
         outline-color: #fff;
         color: #fff;
+        z-index: 199;
+
+        &::placeholder {
+            color: transparent;
+        }
+
+        &:placeholder-shown~label {
+            font-size: 18px;
+            cursor: text;
+            top: 20px;
+        }
+
+        &:focus {
+            ~label {
+                top: 8px;
+                font-size: 14px;
+                color: rgb(133, 133, 133);
+                font-weight: 400;
+            }
+        }
+    }
+
+    label {
+        position: absolute;
+        top: 8px;
+        left: 10px;
+        color: rgb(133, 133, 133);
+        display: block;
+        transition: 0.2s;
         z-index: 99;
+    }
+}
+
+.signin-actions {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    .signin-input {
+        width: 300px;
+        height: 48px;
+        padding: 10px 10px 0px;
+        border: none;
+        border-radius: 5px;
+        background-color: rgba($color: #333333, $alpha: .7);
+        outline: none;
+        color: #fff;
+        z-index: 199;
 
         &::placeholder {
             color: transparent;

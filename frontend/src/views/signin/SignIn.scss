@@ -1,0 +1,85 @@
+.signin-container {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: url("../../../public/assets/hero-back.jpeg");
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: 100% auto cover;
+
+    .signin-header {
+        width: 100%;
+        height: auto;
+        padding: 0px 4%;
+        background-color: rgba($color: #000000, $alpha: .5);
+    }
+
+    .signin-section {
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        background-color: rgba($color: #000000, $alpha: .5);
+
+        .signin-panel {
+            width: 320px;
+            height: auto;
+            max-height: 60vh;
+            border-radius: 5px;
+            padding: 20px 60px 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background-color: rgba($color: #000000, $alpha: .7);
+            color: #fff;
+
+            h2 {
+                font-size: 35px;
+            }
+
+            .primary-button {
+                width: 100%;
+                margin-top: 20px;
+                padding: 15px 0px;
+                font-size: 18px;
+            }
+        }
+
+        .row {
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: space-between;
+            color: #B3B3B3;
+
+            .check-container {
+                display: flex;
+                justify-content: center;
+                gap: 5px;
+                input {
+                    accent-color: #B3B3B3;
+                    -ms-transform: scale(1.4);
+                    -moz-transform: scale(1.4);
+                    -webkit-transform: scale(1.4);
+                    -o-transform: scale(1.4);
+                    transform: scale(1.4);
+                }
+            }
+
+            a {
+                color: #B3B3B3;
+            }
+        }
+
+        p {
+            color: #B3B3B3;
+        }
+
+        a {
+            color: #fff;
+        }
+    }
+}

@@ -1,7 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from "axios";
 import './Hero.scss'
 
 export default function Hero() {
+
+  const navigate = useNavigate();
+  const [newEmail, setNewEmail] = useState();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const response = await axios.get("http://localhost:8888/signup");
+    const userExist = response.data.find((post) => post.Email === newEmail);
+    if (userExist) {
+      navigate("/login");
+      return;
+    } else {
+      navigate("/signup", { state: { User: newEmail } });
+    }
+  }
+
   return (
     <div className='hero-container'>
       <div className='home-header'>
@@ -13,17 +31,17 @@ export default function Hero() {
             <option value="french">Français</option>
             <option value="english">English</option>
           </select>
-          <button className='primary-button'>S'identifier</button>
+          <button className='primary-button' onClick={() => navigate('/login')}>S'identifier</button>
         </div>
       </div>
       <div className='get-start'>
         <h1>Films, séries et bien plus en illimité.</h1>
         <h3>Où que vous soyez. Annulez à tout moment.</h3>
         <h4>Prêt à regarder Netflix ? Saisissez votre adresse e-mail pour vous abonner ou réactiver votre abonnement.</h4>
-        <form className='subscribe-actions'>
-          <input type='email' className='get-start-input' placeholder='Adresse e-mail' name='email' required />
+        <form className='subscribe-actions' onSubmit={handleSubmit}>
+          <input type='email' className='get-start-input' placeholder='Adresse e-mail' name='email' onChange={(e) => setNewEmail(e.target.value)} required />
           <label htmlFor="email" >Adresse e-mail</label>
-          <button className='primary-button'>Commencer <i className="fa-solid fa-chevron-right"></i></button>
+          <button type='submit' className='primary-button'>Commencer <i className="fa-solid fa-chevron-right"></i></button>
         </form>
       </div>
     </div>
