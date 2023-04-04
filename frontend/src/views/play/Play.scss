@@ -70,9 +70,9 @@
         }
 
         .control-container {
-            width: 96%;
+            width: calc(100% - 60px);
             height: auto;
-            padding: 20px 2%;
+            padding: 20px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -85,6 +85,7 @@
                 align-items: center;
                 gap: 20px;
                 z-index: 99;
+                position: relative;
             }
 
             h4 {

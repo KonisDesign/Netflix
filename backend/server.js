@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const config = require('./config/config');
 const routes = require('./routes/user.route');
+const routesMedia = require('./routes/media.route');
 
 const app = express();
 
@@ -20,6 +21,7 @@ mongoose.connect(config.mongoURI, { useNewUrlParser: true, useUnifiedTopology: t
 app.use(bodyParser.json());
 
 app.use('/', routes);
+app.use('/', routesMedia);
 
 app.listen(config.port, () => console.log(`Server started on port ${config.port}`));
 

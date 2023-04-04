@@ -1,9 +1,26 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import './HeaderBrowse.scss'
 
 export default function Header() {
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const position = window.pageYOffset;
+      setScrollPosition(position);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const background = scrollPosition > 100 ? '#000' : 'linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 212, 255, 0) 100%)';
+
   return (
-    <div className='header-browse'>
+    <div className='header-browse' style={{background}}>
       <div className='main'>
         <img className='logo' src={process.env.PUBLIC_URL + '/assets/logo_full.png'} alt='logo_full' />
         <button className='main-button'>Accueil</button>
