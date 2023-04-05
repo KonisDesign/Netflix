@@ -5,10 +5,14 @@ import Header from '../../components/header-browse/HeaderBrowse';
 import './Browse.scss'
 import HeroBrowse from '../../components/hero-browse/HeroBrowse';
 import Section from '../../components/section-browse/Section';
+import FullCard from '../../components/full-card/FullCard';
 
 const Browse = () => {
   const navigate = useNavigate();
   const [media, setMedia] = useState([]);
+
+  const [showFullCard, setShowFullCard] = useState(false)
+    const [cardId, setCardId] = useState('');
 
   const handleLogout = () => {
     localStorage.clear();
@@ -33,12 +37,14 @@ const Browse = () => {
       <Header />
       <HeroBrowse />
       <div className='sections-container'>
-        <Section Media={media} Genre={"Science fiction"}/>
-        <Section Media={media} Genre={"Action"}/>
-        <Section Media={media} Genre={"Comédie"}/>
-        <Section Media={media} Genre={"Super-héros"}/>
+        <Section Media={media} Genre={"Science fiction"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId}/>
+        <Section Media={media} Genre={"Action"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId}/>
+        <Section Media={media} Genre={"Comédie"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId}/>
+        <Section Media={media} Genre={"Super-héros"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId}/>
+        <Section Media={media} Genre={"Thriller"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId}/>
       </div>
       <button onClick={() => handleLogout()}>Logout</button>
+      <FullCard showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} />
     </div>
   );
 };

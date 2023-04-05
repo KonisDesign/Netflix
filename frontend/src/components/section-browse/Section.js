@@ -18,12 +18,17 @@ export default function Section(props) {
         bigCard.style.display = 'flex';
     }
 
+    const ShowFullCard = (id) => {
+        props.setCardId(id)
+        props.setShowFullCard(true)
+
+    }
+
     const hideBigCard = (id) => {
         const bigCard = document.querySelector('#' + id);
         const allbigCard = document.querySelector('.big-card');
         bigCard.style.display = 'none';
         allbigCard.style.display = 'none';
-        videoRef.current.currentTime = 0;
     }
 
     return (
@@ -51,11 +56,25 @@ export default function Section(props) {
                                             <button className='card-button second'><i className="fa-solid fa-thumbs-up"></i></button>
                                         </div>
                                         <div className='actions'>
-                                            <button className='card-button second'><i className="fa-solid fa-chevron-down"></i></button>
+                                            <button className='card-button second' onClick={() => ShowFullCard(media._id)}><i className="fa-solid fa-chevron-down"></i></button>
                                         </div>
+                                    </div>
+                                    <div className='infos'>
+                                        <p className='recomend'>Recomandé à {Math.floor(Math.random() * 30) + 70}%</p>
+                                        <p className='pegi'>{media.Pegi}+</p>
+                                        {media.Genre[0] === 'Film' ? <p className='time'>{media.Time}</p> : media.Seasons === '1' ? <p className='episode'>{media.Season1Title.length} Épisodes</p> : <p className='seasons'>{media.Seasons} Saisons</p>}
+                                        <p className='hd'>HD</p>
+                                    </div>
+                                    <div className='genre-container'>
+                                        <p className='genre'>{media.Genre[1]}</p>
+                                        <i className="fa-solid fa-circle"></i>
+                                        <p className='genre'>{media.Genre[2]}</p>
+                                        <i className="fa-solid fa-circle"></i>
+                                        <p className='genre'>{media.Genre[3]}</p>
                                     </div>
                                 </div>
                             </div>
+                            
                         );
                     }
                     return null;
