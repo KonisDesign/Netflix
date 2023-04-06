@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios';
 import './FullCard.scss'
 import { useNavigate } from 'react-router-dom';
+import Episode from '../episode/Episode';
 
 export default function FullCard(props) {
 
@@ -14,10 +15,14 @@ export default function FullCard(props) {
     const [isSoundOn, setIsSoundOn] = useState(false);
 
     const toggleSound = () => {
-        setIsSoundOn(!isSoundOn);
-        const videoElement = document.querySelector('.media-full-card');
-        videoElement.muted = !isSoundOn;
-      };
+        try {
+            setIsSoundOn(!isSoundOn);
+            const videoElement = document.querySelector('.media-full-card');
+            videoElement.muted = !isSoundOn;
+        } catch {
+
+        }
+    };
 
 
     useEffect(() => {
@@ -33,12 +38,19 @@ export default function FullCard(props) {
         setShowVideo(false);
     };
 
+    const closeFullCard = () => {
+        props.setShowFullCard(false)
+    }
+
+    const [season, setSeason] = useState(1)
+
+
     const myCard = card.find((post) => post._id === props.cardId);
 
     return props.showFullCard && myCard ? (
         <div className='full-card-container'>
             <div className='full-card'>
-                <button className='close-button' onClick={() => props.setShowFullCard(false)}><i className="fa-solid fa-xmark"></i></button>
+                <button className='close-button' onClick={() => closeFullCard()}><i className="fa-solid fa-xmark"></i></button>
                 {showVideo && (
                     <video className='media-full-card' width="100%" autoPlay={true} playsInline onEnded={handleVideoEnd} ref={videoRef}>
                         <source src={process.env.PUBLIC_URL + "/movies/" + myCard.Trailer} type="video/mp4" />
@@ -51,11 +63,11 @@ export default function FullCard(props) {
                     <img className='media-title-image' src={process.env.PUBLIC_URL + '/movies/' + myCard.TitleImage} alt='media_title' />
                 )}
                 {!showVideo && (
-                    <div class='blank'></div>
+                    <div className='blank'></div>
                 )}
                 <div className='controls'>
                     <div className='actions'>
-                        <button className='play-button'><i className="fa-solid fa-play"></i> Lecture</button>
+                        <button className='play-button' onClick={() => navigate('/play/' + myCard._id)}><i className="fa-solid fa-play"></i> Lecture</button>
                         <button className='action-button'><i className="fa-solid fa-plus"></i></button>
                         <button className='action-button'><i className="fa-regular fa-thumbs-up"></i></button>
                     </div>
@@ -63,22 +75,51 @@ export default function FullCard(props) {
                         <button className='action-button' onClick={toggleSound}>{isSoundOn ? <i className='fa-solid fa-volume-mute'></i> : <i className='fa-solid fa-volume-high'></i>}</button>
                     </div>
                 </div>
-                <div className='infos'>
+                <div className='infos-full-card'>
                     <p className='recomend'>Recommandé à 96%</p>
-                    <p className='time'>1 h 42 min</p>
+                    <p className='time'>{myCard.TIme}</p>
                     <p className='hd'>HD</p>
-                    <i class="fa-solid fa-audio-description"></i>
-                    <i class="fa-regular fa-message fa-flip-horizontal"></i>
+                    <i className="fa-solid fa-audio-description"></i>
+                    <i className="fa-regular fa-message fa-flip-horizontal"></i>
                 </div>
-                <p className='pegi'>13+</p>
+                <p className='pegi'>{myCard.Pegi}+</p>
                 <p className='synopsis'>{myCard.Synopsis}</p>
+                {myCard.Genre[0] === 'Série' && (
+                    <div className='episode-header'>
+                        <h3>Episodes</h3>
+
+                        {myCard.Seasons === "1" && (
+                            <h4>{myCard.Name}</h4>
+                        )}
+                        {myCard.Seasons !== "1" && (
+                            <div className='select-seasons'>
+                                <select onChange={(e) => setSeason(Number(e.target.value))} className='seasons'>
+                                    {[...Array(Number(myCard.Seasons)).keys()].map((i) => (
+                                        <option key={i + 1} value={i + 1}>Saison {i + 1}</option>
+                                    ))}
+                                </select>
+                                <i className="fa-solid fa-caret-down"></i>
+                            </div>
+                        )}
+                    </div>
+                )}
+
+                {myCard.Genre[0] === 'Série' && (
+                    <div className='episode-container'>
+                        {Array.isArray(myCard[`Season${season}Title`]) && myCard[`Season${season}Title`].map((media, index) => {
+                            return (
+                                <Episode Media={media} EpisodeNb={index + 1} Poster={myCard.Poster} Url={myCard._id} />
+                            )
+                        })}
+                    </div>
+                )}
                 <h3 className='similar-title'>Titres similaires</h3>
                 <div className='similar-container'>
                     {Array.isArray(card) && card.map((media, index) => {
                         if (media.Genre.includes(myCard.Genre[1]) && media._id !== myCard._id) {
                             return (
                                 <div className='similar-card' key={index}>
-                                    <img className='poster' src={process.env.PUBLIC_URL + '/movies/' + media.Poster} alt='media_poster'/>
+                                    <img className='poster' src={process.env.PUBLIC_URL + '/movies/' + media.Poster} alt='media_poster' />
                                     <div className='header'>
                                         <div className='infos-similar'>
                                             <p className='recomend'>Recommandé à 95%</p>

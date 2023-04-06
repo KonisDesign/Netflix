@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import './HeaderBrowse.scss'
 
-export default function Header() {
+export default function Header(props) {
   const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
@@ -23,10 +23,10 @@ export default function Header() {
     <div className='header-browse' style={{background}}>
       <div className='main'>
         <img className='logo' src={process.env.PUBLIC_URL + '/assets/logo_full.png'} alt='logo_full' />
-        <button className='main-button'>Accueil</button>
-        <button className='main-button'>Séries</button>
-        <button className='main-button'>Films</button>
-        <button className='main-button'>Nouveautés les plus regardés</button>
+        <button className='main-button' onClick={() => props.setMain("main")}>Accueil</button>
+        <button className='main-button' onClick={() => props.setMain("Série")}>Séries</button>
+        <button className='main-button' onClick={() => props.setMain("Film")}>Films</button>
+        <button className='main-button' onClick={() => props.setMain("Nouveautés")}>Nouveautés les plus regardés</button>
         <button className='main-button'>Ma liste</button>
         <button className='main-button'>Explorer par langue</button>
       </div>

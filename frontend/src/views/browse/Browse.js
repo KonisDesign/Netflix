@@ -12,7 +12,9 @@ const Browse = () => {
   const [media, setMedia] = useState([]);
 
   const [showFullCard, setShowFullCard] = useState(false)
-    const [cardId, setCardId] = useState('');
+  const [cardId, setCardId] = useState('');
+
+  const [main, setMain] = useState('');
 
   const handleLogout = () => {
     localStorage.clear();
@@ -24,29 +26,53 @@ const Browse = () => {
     if (!isLoggedIn) {
       navigate('/login');
     } else {
-      const fetchPosts = async () => {
-        const result = await axios.get('http://localhost:8888/browse');
-        setMedia(result.data);
-      };
-      fetchPosts();
+      try {
+        const fetchPosts = async () => {
+          const result = await axios.get('http://localhost:8888/browse');
+          setMedia(result.data);
+        };
+        fetchPosts();
+      } catch {
+
+      }
     }
   }, [navigate]);
 
-  return (
-    <div className='browse-container'>
-      <Header />
-      <HeroBrowse />
-      <div className='sections-container'>
-        <Section Media={media} Genre={"Science fiction"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId}/>
-        <Section Media={media} Genre={"Action"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId}/>
-        <Section Media={media} Genre={"Comédie"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId}/>
-        <Section Media={media} Genre={"Super-héros"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId}/>
-        <Section Media={media} Genre={"Thriller"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId}/>
-      </div>
-      <button onClick={() => handleLogout()}>Logout</button>
-      <FullCard showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} />
-    </div>
-  );
+
+  return !media[0] ? (
+    <h1 className='error-server'>Internal server error</h1>
+  )
+    :
+    (
+      <>
+        <div className='browse-container'>
+          <Header main={main} setMain={setMain} />
+          <HeroBrowse />
+          <div className='sections-container'>
+            {(!main || main === 'main') && (
+              <>
+                <Section Media={media} Genre={"Nouveautés"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
+                <Section Media={media} Genre={"Science fiction"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
+                <Section Media={media} Genre={"Action"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
+                <Section Media={media} Genre={"Comédie"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
+                <Section Media={media} Genre={"Super-héros"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
+                <Section Media={media} Genre={"Thriller"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
+              </>
+            )}
+            {(main === 'Film' || main === 'Série' || main === 'Nouveautés') && (
+              <>
+                <Section Media={media} Genre={"Science fiction"} Genre2={main} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
+                <Section Media={media} Genre={"Action"} Genre2={main} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
+                <Section Media={media} Genre={"Super-héros"} Genre2={main} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
+                <Section Media={media} Genre={"Thriller"} Genre2={main} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
+              </>
+            )}
+          </div>
+          <button onClick={() => handleLogout()}>Logout</button>
+        </div>
+        <FullCard showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} />
+      </>
+    )
 };
 
 export default Browse;
