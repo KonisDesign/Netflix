@@ -3,6 +3,12 @@
 
 A copy of the netflix website in french with the main functions
 
+## Tech Stack
+
+**Client:** React, Sass,
+
+**Server:** Node, Express, jwt, bcrypt
+
 
 ## Installation
 
@@ -32,3 +38,4 @@ To deploy this project run
   npm start
 ```
 ![Logo](https://github.com/KonisDesign/Netflix/raw/main/frontend/public/assets/logo.png)
+
