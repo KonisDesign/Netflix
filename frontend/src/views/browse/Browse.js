@@ -47,11 +47,12 @@ const Browse = () => {
             {(!main || main === 'main') && (
               <>
                 <Section Media={media} Genre={"Nouveautés"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
-                <Section Media={media} Genre={"Science fiction"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
-                <Section Media={media} Genre={"Action"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
                 <Section Media={media} Genre={"Comédie"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
-                <Section Media={media} Genre={"Super-héros"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
                 <Section Media={media} Genre={"Thriller"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
+                <Section Media={media} Genre={"Science fiction"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
+                <Section Media={media} Genre={"Super-héros"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
+                <Section Media={media} Genre={"Action"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
+                <Section Media={media} Genre={"Drame"} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
               </>
             )}
             {(main === 'Film' || main === 'Série' || main === 'Nouveautés') && (
@@ -60,6 +61,7 @@ const Browse = () => {
                 <Section Media={media} Genre={"Action"} Genre2={main} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
                 <Section Media={media} Genre={"Super-héros"} Genre2={main} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
                 <Section Media={media} Genre={"Thriller"} Genre2={main} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
+                <Section Media={media} Genre={"Drame"} Genre2={main} showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} setCardId={setCardId} />
               </>
             )}
           </div>
