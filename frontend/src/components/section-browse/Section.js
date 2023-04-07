@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react'
+import axios from 'axios';
 import './Section.scss'
 import { useNavigate } from 'react-router-dom';
 
@@ -30,6 +31,26 @@ export default function Section(props) {
         allbigCard.style.display = 'none';
     }
 
+    const updateList = async (list) => {
+        const token = localStorage.getItem('token');
+        console.log(list);
+        try {
+          const response = await axios.put('http://localhost:8888/browse', { List: list }, {
+            headers: {
+              'token': `Bearer ${token}`
+            }
+          });
+          console.log(response);
+          if (response.data.error) {
+            alert(response.data.error);
+          } else {
+            alert('Liste mise à jour avec succès');
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
     return props.Genre2 ? (
         <div className='section'>
             <h3 className='title'>{props.Genre}</h3>
@@ -51,7 +72,7 @@ export default function Section(props) {
                                     <div className='card-controls'>
                                         <div className='actions'>
                                             <button className='card-button first' onClick={() => navigate('/play/' + media._id)}><i className="fa-solid fa-play"></i></button>
-                                            <button className='card-button second'><i className="fa-solid fa-plus"></i></button>
+                                            <button className='card-button second' onClick={(e) => updateList(["test"])}><i className="fa-solid fa-plus"></i></button>
                                             <button className='card-button second'><i className="fa-solid fa-thumbs-up"></i></button>
                                         </div>
                                         <div className='actions'>

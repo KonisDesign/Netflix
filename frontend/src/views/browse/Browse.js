@@ -16,11 +16,6 @@ const Browse = () => {
 
   const [main, setMain] = useState('');
 
-  const handleLogout = () => {
-    localStorage.clear();
-    navigate('/login');
-  };
-
   useEffect(() => {
     const isLoggedIn = !!localStorage.getItem('token');
     if (!isLoggedIn) {
@@ -68,7 +63,6 @@ const Browse = () => {
               </>
             )}
           </div>
-          <button onClick={() => handleLogout()}>Logout</button>
         </div>
         <FullCard showFullCard={showFullCard} setShowFullCard={setShowFullCard} cardId={cardId} />
       </>

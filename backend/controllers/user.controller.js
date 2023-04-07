@@ -9,7 +9,7 @@ module.exports.createUser = async (req, res) => {
     if (!Email || !Password) {
       return res.status(400).json({ msg: "Fill the form" });
     }
-    
+
     const isUsernameExist = await User.findOne({
       attributes: ["Email"],
       where: { Email: Email },
@@ -39,28 +39,31 @@ module.exports.loginUser = async (req, res) => {
   const secretKey = 'secret';
 
   try {
-    // Find the user in the database
     const user = await User.findOne({ Email: Email });
 
     if (!user) {
-      // Unauthorized
       return res.status(401).json({ error: 'Email ou mot de passe invalide' });
     }
 
-    // Check if the password is correct
     const isMatch = await bcrypt.compare(Password, user.Password);
     if (!isMatch) {
-      // Unauthorized
       return res.status(401).json({ error: 'Email ou mot de passe invalide' });
     }
-
-    // Create a JWT token with the user id as payload
     const token = jwt.sign({ id: user._id }, secretKey, { expiresIn: '24h' });
-    
+
     res.json({ token });
   } catch (error) {
     console.error(error);
-    // Internal server error
     res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+module.exports.updateList = async (req, res) => {
+  const { list } = req.body;
+  try {
+    await User.update({ list }, { where: { _id: req.user._id } });
+    return res.status(200).json({ message: "List updated" });
+  } catch (error) {
+    res.status(400).json(error);
   }
 };
