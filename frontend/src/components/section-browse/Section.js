@@ -1,60 +1,95 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
-import './Section.scss'
+import './Section.scss';
 import { useNavigate } from 'react-router-dom';
 
 export default function Section(props) {
+  const navigate = useNavigate();
+  const videoRef = useRef(null);
+  const [showVideo, setShowVideo] = useState(true);
+  const divRef = useRef(null);
 
-    const navigate = useNavigate();
-    const videoRef = useRef(null);
+  const handleVideoEnd = () => {
+    setShowVideo(false);
+  };
 
-    const [showVideo, setShowVideo] = useState(true);
+  const showBigCard = (id) => {
+    const bigCard = document.querySelector('#' + id);
+    bigCard.style.display = 'flex';
+  };
 
-    const handleVideoEnd = () => {
-        setShowVideo(false);
-    };
+  const ShowFullCard = (id) => {
+    props.setCardId(id);
+    props.setShowFullCard(true);
+  };
 
-    const showBigCard = (id) => {
-        const bigCard = document.querySelector('#' + id);
-        bigCard.style.display = 'flex';
-    }
+  const hideBigCard = (id) => {
+    const bigCard = document.querySelector('#' + id);
+    const allbigCard = document.querySelector('.big-card');
+    bigCard.style.display = 'none';
+    allbigCard.style.display = 'none';
+  };
 
-    const ShowFullCard = (id) => {
-        props.setCardId(id)
-        props.setShowFullCard(true)
-    }
+  const scrollLeft = (id) => {
+    const div = divRef.current;
+    const maxScrollLeft = div.scrollWidth - div.clientWidth;
+    let scrollLeft = maxScrollLeft;
+    const scrollStep = 10;
 
-    const hideBigCard = (id) => {
-        const bigCard = document.querySelector('#' + id);
-        const allbigCard = document.querySelector('.big-card');
-        bigCard.style.display = 'none';
-        allbigCard.style.display = 'none';
-    }
+    const scrollLoop = setInterval(() => {
+      scrollLeft -= scrollStep;
+      div.scrollLeft = scrollLeft;
 
-    const updateList = async (list) => {
-        const token = localStorage.getItem('token');
-        console.log(list);
-        try {
-          const response = await axios.put('http://localhost:8888/browse', { List: list }, {
-            headers: {
-              'token': `Bearer ${token}`
-            }
-          });
-          console.log(response);
-          if (response.data.error) {
-            alert(response.data.error);
-          } else {
-            alert('Liste mise à jour avec succès');
-          }
-        } catch (error) {
-          console.error(error);
+      if (scrollLeft <= 0) {
+        clearInterval(scrollLoop);
+      }
+    }, 10);
+  };
+
+  const scrollRight = (id) => {
+    const div = document.getElementById(id);
+    const maxScrollLeft = div.scrollWidth - div.clientWidth;
+    let scrollLeft = 0;
+    const scrollStep = 10;
+
+    const scrollLoop = setInterval(() => {
+      scrollLeft += scrollStep;
+      div.scrollLeft = scrollLeft;
+
+      if (scrollLeft >= maxScrollLeft) {
+        clearInterval(scrollLoop);
+      }
+    }, 10);
+  };
+
+  const updateList = async (list) => {
+    const token = localStorage.getItem('token');
+    console.log(list);
+    try {
+      const response = await axios.put(
+        'http://localhost:8888/browse',
+        { List: list },
+        {
+          headers: {
+            token: `Bearer ${token}`,
+          },
         }
-      };
+      );
+      console.log(response);
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
+        alert('Liste mise à jour avec succès');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
     return props.Genre2 ? (
         <div className='section'>
-            <h3 className='title'>{props.Genre}</h3>
-            <div className='list'>
+            <h3 className='title'>{props.Genre.replace(/\s+/g, '')}</h3>
+            <div className='list' id={props.Genre} ref={divRef}>
                 {Array.isArray(props.Media) && props.Media.map((media, index) => {
                     if (media.Genre.includes(props.Genre) && media.Genre.includes(props.Genre2)) {
                         return (
@@ -107,14 +142,14 @@ export default function Section(props) {
                     }
                     return null;
                 })}
-                <button className='next-button'><i className="fa-solid fa-chevron-right"></i></button>
+                <button className='next-button' onClick={() => scrollRight(props.Genre.replace(/\s+/g, ''))}><i className="fa-solid fa-chevron-right"></i></button>
             </div>
         </div>
     )
         : (
             <div className='section'>
                 <h3 className='title'>{props.Genre}</h3>
-                <div className='list'>
+                <div className='list' id={props.Genre.replace(/\s+/g, '')} ref={divRef}>
                     {Array.isArray(props.Media) && props.Media.map((media, index) => {
                         if (media.Genre.includes(props.Genre)) {
                             return (
@@ -167,7 +202,7 @@ export default function Section(props) {
                         }
                         return null;
                     })}
-                    <button className='next-button'><i className="fa-solid fa-chevron-right"></i></button>
+                    <button className='next-button'  onClick={() => scrollRight(props.Genre.replace(/\s+/g, ''))}><i className="fa-solid fa-chevron-right"></i></button>
                 </div>
             </div>
         );
